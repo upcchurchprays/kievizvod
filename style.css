@@ -747,7 +747,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 [data-theme="night"] .reader {
-  background: var(--bg);
+  background: rgba(20, 24, 42, 0.86);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 6px;
 }
 [data-theme="night"] .listing {
   background: rgba(20, 24, 42, 0.93);
@@ -772,7 +775,10 @@ button { font-family: inherit; cursor: pointer; }
   }
 }
 [data-theme="day"] .reader {
-  background: var(--bg);
+  background: rgba(244, 237, 224, 0.86);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 6px;
 }
 [data-theme="day"] .listing {
   background: rgba(244, 237, 224, 0.93);
