@@ -1,0 +1,57 @@
+---
+layout: default
+---
+{% assign section_key = page.section_key %}
+{% if section_key == "molytvoslov" %}
+  {% assign section_title = "Молитвослов" %}
+{% else %}
+  {% assign section_title = "Акафісти" %}
+{% endif %}
+
+<article class="reader">
+  <div class="reader-topbar">
+    <a class="back-btn ghost" href="{{ '/' | append: section_key | append: '/' | relative_url }}">‹ {{ section_title }}</a>
+    <div class="breadcrumb">{{ page.category | default: "" }}</div>
+    {% include reader-tools.html %}
+  </div>
+
+  <div class="prayer-article" style="font-size: var(--reader-size, 22px);">
+    <div class="prayer-body">
+      {{ content }}
+    </div>
+
+    <div class="prayer-end"><span></span>✦<span></span></div>
+  </div>
+
+  <nav class="reader-nav">
+    {% assign prayers = site[section_key] | where: "category", page.category | sort: "order" %}
+    {% for p in prayers %}
+      {% if p.url == page.url %}
+        {% assign idx = forloop.index0 %}
+        {% assign prev = prayers[idx | minus: 1] %}
+        {% assign next_idx = idx | plus: 1 %}
+        {% assign next = prayers[next_idx] %}
+      {% endif %}
+    {% endfor %}
+
+    {% if prev %}
+      <a class="nav-btn" href="{{ prev.url | relative_url }}">
+        <span class="nav-arrow">←</span>
+        <span class="nav-label">
+          <span class="nav-eyebrow">Попередня</span>
+          <span class="nav-title">{{ prev.title }}</span>
+        </span>
+      </a>
+    {% else %}<span></span>{% endif %}
+
+    {% if next %}
+      <a class="nav-btn right" href="{{ next.url | relative_url }}">
+        <span class="nav-label">
+          <span class="nav-eyebrow">Наступна</span>
+          <span class="nav-title">{{ next.title }}</span>
+        </span>
+        <span class="nav-arrow">→</span>
+      </a>
+    {% else %}<span></span>{% endif %}
+  </nav>
+</article>
