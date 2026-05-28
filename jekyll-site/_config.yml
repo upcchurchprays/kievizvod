@@ -1,0 +1,28 @@
+title: "✦ Молитовник"
+description: "Православний молитовник на Jekyll — готовий до публікації на GitHub Pages"
+lang: uk
+url: "http://localhost:4000"
+baseurl: ""
+
+collections:
+  molytvoslov:
+    output: true
+    permalink: /molytvoslov/:path/
+  akafisty:
+    output: true
+    permalink: /akafisty/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: molytvoslov
+    values:
+      layout: prayer
+  - scope:
+      path: ""
+      type: akafisty
+    values:
+      layout: prayer
+
+markdown: kramdown
+theme: minima
