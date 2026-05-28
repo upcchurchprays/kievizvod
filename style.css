@@ -1232,19 +1232,39 @@ button { font-family: inherit; cursor: pointer; }
     background-attachment: scroll;
   }
 
-  /* Прозорий фон для текстових колонок — фото проглядається крізь текст */
-  [data-theme="day"] .reader,
+  /* Список залишається з напівпрозорою колонкою */
   [data-theme="day"] .listing {
     background: rgba(244, 237, 224, 0.72);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 4px;
   }
-  [data-theme="night"] .reader,
   [data-theme="night"] .listing {
     background: rgba(20, 24, 42, 0.72);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 4px;
+  }
+
+  /* Колонка читача прозора (вона тягнеться на всю висоту через flex:1),
+     а напівпрозору підкладку дає сам блок тексту молитви — так панель
+     має оптимальний розмір по контенту, а не на весь екран */
+  [data-theme="day"] .reader,
+  [data-theme="night"] .reader {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .prayer-article {
+    padding: 20px 18px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  [data-theme="day"] .prayer-article {
+    background: rgba(244, 237, 224, 0.80);
+  }
+  [data-theme="night"] .prayer-article {
+    background: rgba(20, 24, 42, 0.80);
   }
 }
