@@ -1,0 +1,61 @@
+# ═════════════════════════════════════════════════════════════════
+# Jekyll 3.x — Молитовник
+# Сумісно з GitHub Pages (https://pages.github.com)
+# ═════════════════════════════════════════════════════════════════
+
+title: "Молитовник"
+description: "Збірка православних молитов та акафістів українською мовою з наголосами"
+lang: uk
+locale: uk_UA
+
+# Якщо публікуєте за адресою https://USER.github.io/REPO/
+# розкоментуйте та підставте ім'я репозиторію:
+# baseurl: "/molytovnyk"
+# url: "https://USER.github.io"
+
+# GitHub Pages підтримує лише Jekyll 3.x — фіксуємо версію
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ─── Колекції: дві основні секції сайту ──────────────────────────
+collections:
+  molytvoslov:
+    output: true
+    permalink: /molytvoslov/:path/
+    title: "Молитвослов"
+  akafisty:
+    output: true
+    permalink: /akafisty/:path/
+    title: "Акафісти"
+
+# ─── Дефолтні значення front-matter ──────────────────────────────
+defaults:
+  - scope: { path: "", type: "molytvoslov" }
+    values:
+      layout: prayer
+      section_key: molytvoslov
+  - scope: { path: "", type: "akafisty" }
+    values:
+      layout: prayer
+      section_key: akafisty
+
+# ─── Markdown ────────────────────────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# ─── Сборка ──────────────────────────────────────────────────────
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+  - jekyll-site

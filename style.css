@@ -1,0 +1,1228 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   МОЛИТОВНИК — стилі прототипу
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Денний режим — слонова кістка, золото, темне чорнило */
+  --bg:         #f4ede0;
+  --bg-2:       #e8dcc3;
+  --bg-3:       #ddd0b3;
+  --paper:      #fbf6ec;
+  --ink:        #1a1612;
+  --ink-2:      #4a3f31;
+  --muted:      #8a7a5e;
+  --gold:       #b8893a;
+  --gold-deep:  #8a6420;
+  --green:      #3d5849;
+  --navy:       #1c2a44;
+  --rule:       #c8b896;
+  --rule-soft:  #e0d3b4;
+  --card-bg:    rgba(251, 246, 236, 0.92);
+  --shadow:     0 1px 0 rgba(184, 137, 58, 0.15), 0 12px 32px -16px rgba(26, 22, 18, 0.25);
+}
+
+[data-theme="night"] {
+  /* Нічний режим — темна синь, тепле золото, кремові букви */
+  --bg:         #14182a;
+  --bg-2:       #1c2238;
+  --bg-3:       #252b45;
+  --paper:      #1a1f33;
+  --ink:        #ede4cf;
+  --ink-2:      #b8ad95;
+  --muted:      #7a7560;
+  --gold:       #d4a85a;
+  --gold-deep:  #b8893a;
+  --green:      #6a8a76;
+  --navy:       #0a0e1c;
+  --rule:       #3a4264;
+  --rule-soft:  #2a3050;
+  --card-bg:    rgba(28, 34, 56, 0.85);
+  --shadow:     0 1px 0 rgba(212, 168, 90, 0.10), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+}
+
+button { font-family: inherit; cursor: pointer; }
+
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ───────────────────────────────────────────── TOPBAR (sticky brand) */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center;
+  padding: 14px 32px;
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: none; border: 0; color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 500; letter-spacing: 0.02em;
+  padding: 4px 0;
+}
+.brand:hover { color: var(--gold-deep); }
+.topbar-spacer { flex: 1; }
+
+/* Інструменти читача у верхній панелі */
+.topbar-reader-tools {
+  display: flex; align-items: center; gap: 8px;
+  margin-right: 10px;
+}
+
+.theme-mini {
+  background: none; border: 1px solid var(--rule);
+  color: var(--ink); width: 36px; height: 36px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.theme-mini:hover { background: var(--bg-2); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO — повноекранна Лавра
+   ═══════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  color: #f7f0dd;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('assets/lavra-hero.jpeg') center/cover no-repeat;
+  filter: saturate(0.85) contrast(1.05);
+  z-index: -2;
+}
+.hero-vignette {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(10, 14, 28, 0.55) 0%,
+      rgba(10, 14, 28, 0.30) 28%,
+      rgba(10, 14, 28, 0.55) 65%,
+      rgba(10, 14, 28, 0.88) 100%),
+    radial-gradient(120% 80% at 50% 30%, transparent 40%, rgba(10,14,28,0.45) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 32px 60px;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.hero-mark {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid rgba(212, 168, 90, 0.6);
+  color: #d4a85a;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', 'Old Standard TT', serif;
+  font-weight: 400;
+  font-size: clamp(56px, 9vw, 120px);
+  letter-spacing: 0.01em;
+  line-height: 1.0;
+  margin: 0 0 24px;
+  color: #fbf6ec;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.hero-eyebrow {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: clamp(14px, 1.4vw, 18px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d4a85a;
+  font-weight: 400;
+}
+.hero-sub {
+  font-family: 'Old Standard TT', serif;
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.55;
+  margin: 0 0 36px;
+  color: rgba(251, 246, 236, 0.88);
+  max-width: 580px;
+  text-wrap: pretty;
+}
+.hero-divider {
+  display: flex; align-items: center; gap: 16px;
+  width: 320px; max-width: 80%;
+  color: rgba(212, 168, 90, 0.65);
+  margin-bottom: 56px;
+}
+.hero-divider span {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 90, 0.4), transparent);
+}
+
+.hero-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  width: 100%; max-width: 720px;
+}
+.hero-card {
+  background: rgba(251, 246, 236, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 168, 90, 0.35);
+  border-radius: 2px;
+  padding: 36px 28px 28px;
+  color: #fbf6ec;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex; flex-direction: column; gap: 6px;
+  min-height: 220px;
+}
+.hero-card::before {
+  content: ""; position: absolute; inset: 6px;
+  border: 1px solid rgba(212, 168, 90, 0.15);
+  pointer-events: none;
+}
+.hero-card:hover {
+  background: rgba(251, 246, 236, 0.10);
+  border-color: rgba(212, 168, 90, 0.7);
+  transform: translateY(-2px);
+}
+.hero-card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; color: #d4a85a;
+  font-weight: 300;
+  margin-bottom: 28px;
+  letter-spacing: 0.05em;
+}
+.hero-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 500;
+  line-height: 1.1;
+}
+.hero-card-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(251, 246, 236, 0.7);
+  margin-bottom: 18px;
+}
+.hero-card-count {
+  margin-top: auto;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #d4a85a;
+  border-top: 1px solid rgba(212, 168, 90, 0.25);
+  padding-top: 14px;
+}
+
+.hero-foot {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(212, 168, 90, 0.6);
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LISTING — список молитов розділу
+   ═══════════════════════════════════════════════════════════════════ */
+.listing {
+  max-width: 780px; margin: 0 auto; padding: 48px 32px 80px;
+  width: 100%;
+}
+.listing-header-simple {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 20px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 48px;
+}
+.listing-header-simple .back-btn {
+  align-self: flex-start;
+}
+.back-btn {
+  background: none; border: 0; color: var(--ink-2);
+  font-size: 14px; letter-spacing: 0.04em;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 0;
+}
+.back-btn:hover { color: var(--gold-deep); }
+.back-btn.ghost { font-size: 13px; }
+
+.listing-titleblock { text-align: center; }
+.listing-eyebrow {
+  font-size: 12px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold-deep);
+  font-style: italic;
+  font-family: 'Lora', serif;
+  margin-bottom: 12px;
+}
+.listing-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.0;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+.listing-sub {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 520px;
+  margin-left: auto; margin-right: auto;
+}
+.search-wrap {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 8px 12px;
+  color: var(--muted);
+  min-width: 240px;
+}
+.search {
+  background: none; border: 0; outline: 0;
+  color: var(--ink); font-size: 14px; font-family: inherit;
+  flex: 1; min-width: 0;
+}
+.search::placeholder { color: var(--muted); font-style: italic; }
+
+.sections-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px 64px;
+}
+.section-block {}
+.section-head {
+  display: flex; align-items: baseline; gap: 18px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; color: var(--gold);
+  font-weight: 300;
+  line-height: 1;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 500;
+  margin: 0; color: var(--ink);
+  letter-spacing: 0.005em;
+}
+.section-meta {
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+  font-style: italic;
+}
+
+.prayer-index {
+  list-style: none; padding: 0; margin: 0;
+}
+.prayer-index li + li { border-top: 1px dotted var(--rule-soft); }
+.prayer-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 32px 1fr 16px;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 4px;
+  background: none; border: 0; text-align: left;
+  color: var(--ink);
+  transition: all 0.18s ease;
+}
+.prayer-row:hover {
+  background: var(--paper);
+  padding-left: 12px; padding-right: 12px;
+}
+.prayer-row-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--gold);
+  text-align: right;
+}
+.prayer-row-body { display: flex; flex-direction: column; gap: 2px; }
+.prayer-row-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.prayer-row-sub {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+}
+.prayer-row-arrow {
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0; transition: opacity 0.18s, transform 0.18s;
+}
+.prayer-row:hover .prayer-row-arrow { opacity: 1; transform: translateX(2px); }
+
+.upload-hint {
+  margin-top: 72px;
+  padding: 20px 24px;
+  background: var(--paper);
+  border: 1px dashed var(--rule);
+  border-radius: 2px;
+  display: flex; gap: 14px; align-items: flex-start;
+  color: var(--ink-2);
+  font-size: 14px; line-height: 1.55;
+}
+.upload-hint code {
+  background: var(--bg-2);
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--gold-deep);
+}
+
+/* ─── Flat prayer list (прості посилання) ───────────────────────── */
+.prayer-flat-list {
+  list-style: none; padding: 0; margin: 0 0 48px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.prayer-flat-list li + li {
+  border-top: 1px solid var(--rule-soft);
+}
+.prayer-flat-link {
+  width: 100%;
+  display: flex; align-items: center; gap: 18px;
+  padding: 24px 12px;
+  background: none; border: 0; text-align: left;
+  color: var(--ink);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.prayer-flat-link:hover {
+  background: var(--paper);
+  padding-left: 20px;
+}
+.prayer-flat-link svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.prayer-flat-body {
+  display: flex; flex-direction: column; gap: 4px;
+  flex: 1;
+}
+.prayer-flat-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.prayer-flat-sub {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+}
+.prayer-flat-arrow {
+  color: var(--gold);
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.prayer-flat-link:hover .prayer-flat-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   READER — читання молитви
+   ═══════════════════════════════════════════════════════════════════ */
+.reader {
+  flex: 1;
+  max-width: 760px; margin: 0 auto; padding: 32px 32px 96px;
+  width: 100%;
+}
+.reader-topbar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid var(--rule-soft);
+  margin-bottom: 48px;
+}
+.breadcrumb {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  flex: 1;
+}
+.reader-tools {
+  display: flex; align-items: center; gap: 8px;
+}
+.seg {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.seg button, .seg .seg-val {
+  background: none; border: 0;
+  color: var(--ink);
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: 'Cormorant Garamond', serif;
+  min-width: 30px;
+  border-right: 1px solid var(--rule-soft);
+}
+.seg button:last-child, .seg .seg-val:last-child { border-right: 0; }
+.seg button:hover { background: var(--bg-2); }
+.seg button.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.seg .seg-val {
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 8px;
+}
+.theme-btn {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 2px;
+}
+.theme-btn:hover { background: var(--bg-2); }
+
+/* PDF download button */
+.pdf-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--gold-deep);
+  padding: 5px 14px 5px 10px;
+  border-radius: 2px;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.pdf-btn:hover {
+  background: var(--bg-2);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.pdf-btn svg { flex-shrink: 0; }
+
+@media (max-width: 580px) {
+  .pdf-btn-label { display: none; }
+  .pdf-btn { padding: 5px 8px; }
+}
+
+.prayer-article {
+  line-height: 1.7;
+  color: var(--ink);
+}
+.prayer-meta {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--gold-deep);
+  font-family: 'Lora', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.prayer-body { font-size: inherit; }
+.prayer-h1, .prayer-h2, .prayer-h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.prayer-h2 {
+  font-size: 1.85em;
+  margin: 0 0 0.6em;
+  line-height: 1.15;
+}
+.prayer-h2::after {
+  content: ""; display: block;
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 18px auto 0;
+}
+.prayer-h3 {
+  font-size: 1.15em;
+  margin: 1.8em 0 0.4em;
+  color: var(--gold-deep);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.prayer-p {
+  margin: 0 0 1em;
+  text-indent: 1.2em;
+  text-wrap: pretty;
+  hyphens: auto;
+}
+.prayer-p:first-of-type { text-indent: 0; }
+.prayer-p:first-of-type::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: 0.95;
+  padding: 0.08em 0.1em 0 0;
+  color: var(--gold-deep);
+  font-weight: 500;
+}
+.prayer-list {
+  list-style: none; padding: 0;
+  margin: 0 0 1.2em;
+}
+.prayer-list li {
+  padding: 0.18em 0 0.18em 1.5em;
+  position: relative;
+  text-indent: 0;
+}
+.prayer-list li::before {
+  content: "✦";
+  position: absolute; left: 0;
+  color: var(--gold);
+  font-size: 0.7em;
+  top: 0.5em;
+}
+.prayer-p em, .prayer-list em {
+  color: var(--gold-deep);
+  font-style: italic;
+}
+.prayer-p strong {
+  color: var(--ink);
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.prayer-end {
+  display: flex; align-items: center; gap: 16px;
+  color: var(--gold);
+  margin-top: 48px;
+}
+.prayer-end span {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rule), transparent);
+}
+
+.reader-nav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule-soft);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.nav-btn {
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  padding: 16px 20px;
+  color: var(--ink);
+  text-align: left;
+  display: flex; align-items: center; gap: 14px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.nav-btn.right { justify-content: flex-end; text-align: right; }
+.nav-btn:hover { border-color: var(--gold); }
+.nav-arrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--gold);
+}
+.nav-label { display: flex; flex-direction: column; gap: 2px; }
+.nav-eyebrow {
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.nav-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════════ */
+.footer {
+  margin-top: auto;
+  padding: 24px 32px;
+  border-top: 1px solid var(--rule-soft);
+  background: var(--bg-2);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.footer-row {
+  max-width: 1080px; margin: 0 auto;
+  display: flex; justify-content: space-between; gap: 16px;
+  align-items: center;
+}
+.footer-mid {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+  .listing-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .sections-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-nav { grid-template-columns: 1fr; }
+  .reader-nav { grid-template-columns: 1fr; }
+  .footer-row { flex-direction: column; text-align: center; gap: 8px; }
+  .hero-content { padding: 60px 20px 40px; }
+  .reader-topbar { gap: 10px; }
+  .topbar-reader-tools { gap: 6px; }
+  .topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  .pdf-btn-label { display: none; }
+  .pdf-btn { padding: 5px 8px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ШРИФТИ — підтримка наголосів через комбінований акут U+0301
+   Old Standard TT та Cormorant Garamond добре рендерять діакритики
+   ═══════════════════════════════════════════════════════════════════ */
+.prayer-article { font-feature-settings: "liga", "kern"; }
+
+/* фонове декоративне золото для нічного режиму */
+[data-theme="night"] body { background: var(--bg); }
+[data-theme="night"] .hero-bg {
+  background-image:
+    linear-gradient(rgba(10, 14, 28, 0.45), rgba(10, 14, 28, 0.45)),
+    url('assets/lavra-hero.jpeg');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.75) brightness(0.85) contrast(1.05);
+}
+
+/* Вифлеємський сад — фонове зображення лише в нічному режимі,
+   видиме на полях навколо центральної колонки читача */
+[data-theme="night"] body {
+  background-image:
+    linear-gradient(rgba(12, 15, 35, 0.78), rgba(12, 15, 35, 0.78)),
+    url('assets/Bethlehem%20garden.png');
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+/* fixed — для десктопів; scroll — вже задано вище як безпечний fallback */
+@media (hover: hover) {
+  [data-theme="night"] body {
+    background-attachment: fixed;
+  }
+}
+[data-theme="night"] .reader {
+  background: var(--bg);
+}
+[data-theme="night"] .listing {
+  background: rgba(20, 24, 42, 0.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Дерево в пустелі — фонове зображення лише в денному режимі,
+   видиме на полях навколо центральної колонки читача */
+[data-theme="day"] body {
+  background-image:
+    linear-gradient(rgba(244, 237, 224, 0.82), rgba(244, 237, 224, 0.82)),
+    url('assets/tree%20in%20the%20desert.png');
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+@media (hover: hover) {
+  [data-theme="day"] body {
+    background-attachment: fixed;
+  }
+}
+[data-theme="day"] .reader {
+  background: var(--bg);
+}
+[data-theme="day"] .listing {
+  background: rgba(244, 237, 224, 0.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BOOKMARK BUTTON (у верхній панелі читача)
+   ═══════════════════════════════════════════════════════════════════ */
+.bookmark-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  padding: 5px 14px 5px 10px;
+  border-radius: 2px;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.bookmark-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-deep);
+  background: var(--bg-2);
+}
+.bookmark-btn.on {
+  background: color-mix(in oklab, var(--gold) 14%, var(--paper));
+  border-color: var(--gold);
+  color: var(--gold-deep);
+}
+.bookmark-btn svg { flex-shrink: 0; }
+
+@media (max-width: 580px) {
+  .bookmark-btn-label { display: none; }
+  .bookmark-btn { padding: 5px 8px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HOME WRAP — обгортка для героя + обраного
+   ═══════════════════════════════════════════════════════════════════ */
+.home-wrap {
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+.home-wrap .hero {
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   РОЗДІЛ "ОБРАНЕ"
+   ═══════════════════════════════════════════════════════════════════ */
+.favorites-section {
+  background: var(--bg-2);
+  border-top: 1px solid var(--rule);
+}
+.favorites-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 64px 32px 80px;
+  width: 100%;
+}
+.favorites-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.favorites-icon {
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+}
+.favorites-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 0;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+.favorites-count {
+  margin-left: auto;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* Порожній стан */
+.favorites-empty {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: var(--muted);
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 28px 0 8px;
+}
+.favorites-empty svg {
+  flex-shrink: 0;
+  color: var(--rule);
+  margin-top: 3px;
+}
+.favorites-empty p {
+  margin: 0;
+}
+.fav-inline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Lora', serif;
+  font-style: normal;
+  font-size: 12px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  padding: 2px 8px 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Список закладок */
+.favorites-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column;
+}
+.favorites-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.favorites-item:first-child {
+  border-top: none;
+}
+.favorites-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 10px;
+  background: none; border: 0;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 0;
+}
+.favorites-link:hover {
+  background: var(--paper);
+  padding-left: 18px;
+}
+.favorites-link svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.favorites-link-body {
+  flex: 1;
+  display: flex; flex-direction: column; gap: 3px;
+  min-width: 0;
+}
+.favorites-link-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favorites-link-meta {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+}
+.favorites-link-arrow {
+  color: var(--gold);
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.favorites-link:hover .favorites-link-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+.favorites-remove {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--muted);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 4px;
+  transition: all 0.18s ease;
+}
+.favorites-remove:hover {
+  color: #b04040;
+  border-color: rgba(176,64,64,0.3);
+  background: rgba(176,64,64,0.07);
+}
+
+@media (max-width: 600px) {
+  .favorites-inner { padding: 44px 20px 60px; }
+  .favorites-link-title { font-size: 19px; }
+  .favorites-link { gap: 12px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ПОШУК — герой (на темному фоні)
+   ═══════════════════════════════════════════════════════════════════ */
+.hero-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin-bottom: 32px;
+}
+.hero-divider { margin-bottom: 32px; }
+
+.hero-search-wrap {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(251, 246, 236, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 168, 90, 0.30);
+  padding: 13px 18px;
+  border-radius: 2px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.hero-search-wrap.focused {
+  background: rgba(251, 246, 236, 0.13);
+  border-color: rgba(212, 168, 90, 0.65);
+}
+.hero-search-icon {
+  color: rgba(212, 168, 90, 0.65);
+  display: flex; flex-shrink: 0;
+}
+.hero-search-input {
+  background: none; border: 0; outline: 0;
+  color: #fbf6ec;
+  font-family: 'Lora', serif;
+  font-size: 16px; font-style: italic;
+  flex: 1; min-width: 0;
+}
+.hero-search-input::placeholder {
+  color: rgba(251, 246, 236, 0.38);
+  font-style: italic;
+}
+.hero-search-clear {
+  background: none; border: 0; padding: 0;
+  color: rgba(251, 246, 236, 0.45);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: color 0.15s;
+}
+.hero-search-clear:hover { color: rgba(251, 246, 236, 0.9); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ПОШУК — верхня панель (на фоні topbar)
+   ═══════════════════════════════════════════════════════════════════ */
+.topbar-search-container {
+  position: relative;
+  margin-right: 6px;
+}
+.topbar-search-btn {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  width: 36px; height: 36px;
+  border-radius: 2px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.topbar-search-btn:hover {
+  background: var(--bg-2);
+  border-color: var(--gold);
+  color: var(--gold-deep);
+}
+.topbar-search-wrap {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--paper);
+  border: 1px solid var(--gold);
+  padding: 7px 12px;
+  border-radius: 2px;
+  width: 260px;
+  transition: width 0.2s;
+}
+.topbar-search-icon {
+  color: var(--gold-deep);
+  display: flex; flex-shrink: 0;
+}
+.topbar-search-input {
+  background: none; border: 0; outline: 0;
+  color: var(--ink);
+  font-family: 'Lora', serif;
+  font-size: 14px; font-style: italic;
+  flex: 1; min-width: 0;
+}
+.topbar-search-input::placeholder { color: var(--muted); font-style: italic; }
+.topbar-search-close {
+  background: none; border: 0; padding: 0;
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: color 0.15s;
+}
+.topbar-search-close:hover { color: var(--ink); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   РЕЗУЛЬТАТИ ПОШУКУ — спільні + варіанти
+   ═══════════════════════════════════════════════════════════════════ */
+.search-results {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px);
+  z-index: 300;
+  list-style: none; padding: 0; margin: 0;
+  border-radius: 2px;
+  max-height: 380px; overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.search-results--hero {
+  background: rgba(12, 15, 28, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 168, 90, 0.28);
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.55);
+}
+.search-results--topbar {
+  background: color-mix(in oklab, var(--bg) 97%, transparent);
+  border: 1px solid var(--rule);
+  box-shadow: 0 8px 28px -6px rgba(0,0,0,0.18);
+}
+[data-theme="night"] .search-results--topbar {
+  box-shadow: 0 8px 28px -6px rgba(0,0,0,0.5);
+}
+
+.search-results--empty {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px;
+  font-family: 'Old Standard TT', serif;
+  font-style: italic; font-size: 14px;
+  list-style: none;
+}
+.search-results--hero.search-results--empty { color: rgba(251, 246, 236, 0.42); }
+.search-results--topbar.search-results--empty { color: var(--muted); }
+
+.search-result-btn {
+  width: 100%;
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 20px;
+  background: none; border: 0; text-align: left;
+  cursor: pointer; transition: background 0.14s;
+}
+/* hero variant */
+.search-results--hero li { border-bottom: 1px solid rgba(212, 168, 90, 0.10); }
+.search-results--hero li:last-child { border-bottom: 0; }
+.search-results--hero .search-result-btn { color: #fbf6ec; }
+.search-results--hero .search-result-btn:hover { background: rgba(212, 168, 90, 0.07); }
+.search-results--hero .search-result-btn svg { color: rgba(212, 168, 90, 0.55); flex-shrink: 0; }
+/* topbar variant */
+.search-results--topbar li { border-bottom: 1px solid var(--rule-soft); }
+.search-results--topbar li:last-child { border-bottom: 0; }
+.search-results--topbar .search-result-btn { color: var(--ink); }
+.search-results--topbar .search-result-btn:hover { background: var(--paper); }
+.search-results--topbar .search-result-btn svg { color: var(--gold); flex-shrink: 0; }
+
+.search-result-body {
+  display: flex; flex-direction: column; gap: 2px;
+  flex: 1; min-width: 0;
+}
+.search-result-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.search-result-meta {
+  font-family: 'Old Standard TT', serif;
+  font-style: italic; font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.search-results--hero .search-result-meta { color: rgba(212, 168, 90, 0.65); }
+.search-results--topbar .search-result-meta { color: var(--muted); }
+.search-result-excerpt {
+  font-family: 'Lora', serif;
+  font-style: italic; font-size: 12px;
+  margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.search-results--hero .search-result-excerpt { color: rgba(251, 246, 236, 0.38); }
+.search-results--topbar .search-result-excerpt { color: var(--muted); }
+.search-result-arrow {
+  font-size: 14px; flex-shrink: 0;
+  opacity: 0; transition: opacity 0.14s, transform 0.14s;
+}
+.search-results--hero .search-result-arrow { color: rgba(212, 168, 90, 0.7); }
+.search-results--topbar .search-result-arrow { color: var(--gold); }
+.search-result-btn:hover .search-result-arrow { opacity: 1; transform: translateX(2px); }
+
+@media (max-width: 580px) {
+  .topbar-search-wrap { width: 200px; }
+  .hero-search-container { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE — показ фонових зображень якомога щільніше до тексту
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+  /* Залишаємо вузькі поля з обох боків, де видно фонове фото,
+     але текстова колонка не накривається зображенням */
+  .listing,
+  .reader {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .favorites-inner {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* Послаблюємо напівпрозору вуаль, щоб фотозображення було помітне */
+  [data-theme="day"] body {
+    background-image:
+      linear-gradient(rgba(244, 237, 224, 0.55), rgba(244, 237, 224, 0.55)),
+      url('assets/tree%20in%20the%20desert.png');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: scroll;
+  }
+  [data-theme="night"] body {
+    background-image:
+      linear-gradient(rgba(12, 15, 35, 0.55), rgba(12, 15, 35, 0.55)),
+      url('assets/Bethlehem%20garden.png');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: scroll;
+  }
+}
