@@ -460,6 +460,16 @@ button { font-family: inherit; cursor: pointer; }
 .prayer-article {
   line-height: 1.7;
   color: var(--ink);
+  background: var(--card-bg);
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  padding: 40px 44px;
+  box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+@media (max-width: 640px) {
+  .prayer-article { padding: 28px 22px; }
 }
 .prayer-meta {
   display: inline-flex; align-items: center; gap: 8px;
