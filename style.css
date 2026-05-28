@@ -1214,22 +1214,35 @@ button { font-family: inherit; cursor: pointer; }
     padding-right: 18px;
   }
 
+  /* На мобільному фон рендеримо через фіксований псевдоелемент,
+     прив'язаний до розміру вікна (viewport), а не до повної висоти
+     документа. Так зображення масштабується під екран телефона,
+     а не як для широкого монітора (коли cover на високому body
+     роздуває фото). */
+  body {
+    background-image: none;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
   /* Послаблюємо напівпрозору вуаль, щоб фотозображення було помітне */
-  [data-theme="day"] body {
+  [data-theme="day"] body::before {
     background-image:
       linear-gradient(rgba(244, 237, 224, 0.45), rgba(244, 237, 224, 0.45)),
       url('assets/tree%20in%20the%20desert.png');
-    background-size: cover;
-    background-position: center top;
-    background-attachment: scroll;
   }
-  [data-theme="night"] body {
+  [data-theme="night"] body::before {
     background-image:
       linear-gradient(rgba(12, 15, 35, 0.45), rgba(12, 15, 35, 0.45)),
       url('assets/Bethlehem%20garden.png');
-    background-size: cover;
-    background-position: center top;
-    background-attachment: scroll;
   }
 
   /* Список залишається з напівпрозорою колонкою */
